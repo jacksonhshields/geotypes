@@ -1,0 +1,16 @@
+---
+title: "geotypes"
+---
+
+# geotypes
+
+geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis.
+
+Visit the [documentation](https://jacksonhshields.github.io/geotypes/) for installation, getting started, tutorials and API reference.
+
+
+## Tutorials
+
+To get started with geotypes, check out the tutorials, which run you through the data types and how to use them.
+
+
