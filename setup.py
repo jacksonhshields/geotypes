@@ -25,6 +25,5 @@ setup(
         'pymap3d',
         'utm',
         'geopy',
-        'pydantic',    
     ]
 )

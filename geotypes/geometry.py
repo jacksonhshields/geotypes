@@ -184,7 +184,7 @@ class LL(GeoType):
         lon_min = abs((self.lon - lon_deg) * 60)
         print(f"Latitude: {lat_deg}° {lat_min}', Longitude: {lon_deg}° {lon_min}'")
 
-    def print_degrees_minutes_second(self):
+    def print_degrees_minutes_seconds(self):
         lat_deg = int(self.lat)
         lat_min = int((self.lat - lat_deg) * 60)
         lat_sec = ((self.lat - lat_deg) * 60 - lat_min) * 60
