@@ -5,13 +5,6 @@ from .rasters import Raster, RasterRegistry
 from typing import Union, Iterable, Optional
 from multiprocessing import Pool, cpu_count
 
-try:
-    USE_TORCH = True
-    import torch
-except ImportError:
-    warnings.warn("Torch not installed. Live models + converting to tensor not supported.")
-    USE_TORCH = False
-
 class FeatureExtractorBase:
     def get_output_format(self):
         """
