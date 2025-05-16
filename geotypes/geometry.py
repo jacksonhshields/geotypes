@@ -749,6 +749,8 @@ class GeoPath(GeoType):
                 gpath = gpd.GeoSeries(shapely.geometry.LineString(points), crs=crs)
             else:
                 raise ValueError("invalid type contained in list")
+        elif isinstance(points, shapely.geometry.LineString):
+            gpath = gpd.GeoSeries(points, crs=crs)
         else:
             raise ValueError("Invalid input")
         self.gpath = gpath
@@ -1494,3 +1496,19 @@ def set_to_points(surveys, subsample_dist):
         else:
             raise ValueError("Not valid")
     return points
+
+def load_geometries(path: str) -> List['GeoType']:
+    if not os.path.isfile(path):
+        raise ValueError("Invalid path")
+    geometry_list = []
+    gdf = gpd.read_file(path).explode()
+    for index,row in gdf.iterrows():
+        if row.geometry.geom_type == "Point":
+            geometry_list.append(GeoPoint(row.geometry.x, row.geometry.y, crs=gdf.crs))
+        elif row.geometry.geom_type == "MultiPoint":
+            geometry_list.append(GeoPoints(row.geometry,crs=gdf.crs))
+        elif row.geometry.geom_type == "LineString":
+            geometry_list.append(GeoPath(row.geometry, crs=gdf.crs))
+        elif row.geometry.geom_type == "Polygon":
+            geometry_list.append(GeoArea(row.geometry, crs=gdf.crs))
+    return geometry_list
