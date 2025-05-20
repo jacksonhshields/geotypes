@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "geotypes",
+    "section": "",
+    "text": "geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis.\nVisit the documentation for installation, getting started, tutorials and API reference.\n\n\nTo get started with geotypes, check out the tutorials, which run you through the data types and how to use them."
+  },
+  {
+    "objectID": "index.html#tutorials",
+    "href": "index.html#tutorials",
+    "title": "geotypes",
+    "section": "",
+    "text": "To get started with geotypes, check out the tutorials, which run you through the data types and how to use them."
+  },
+  {
+    "objectID": "tutorials/DataTypes.html",
+    "href": "tutorials/DataTypes.html",
+    "title": "Data Types",
+    "section": "",
+    "text": "Geotypes adds some high-level wrappers around geopandas and shapely to allow for easier use. They allow easy conversion between georeference schemes, better tracking of what coordinate system the variables are in and easy conversion between types. These include:\nimport geotypes"
+  },
+  {
+    "objectID": "tutorials/DataTypes.html#geopoint",
+    "href": "tutorials/DataTypes.html#geopoint",
+    "title": "Data Types",
+    "section": "GeoPoint",
+    "text": "GeoPoint\nThe GeoPoint is an x,y coordinate with an associated Coordinate Reference System (CRS). It allows easy conversion to LL and XY data types.\n\np = geotypes.geometry.GeoPoint(x=151.28826000, y=-33.79798000, crs=\"epsg:4326\") # initialise a lat, lon centred in Manly.\nprint(\"GeoPoint\", p)\nll = p.to_ll() # Converts to lat,lon data type\nprint(\"In LL\", ll)\np_utm = p.to_crs(\"EPSG:32756\")  # converts to utm zone 56S\nprint(\"In UTM Zone 56S\", p_utm)\n\nGeoPoint GeoPoint(x=151.28826,y=-33.79798,crs=epsg:4326)\nIn LL LL(lat=-33.79798, lon=151.28826)\nIn UTM Zone 56S GeoPoint(x=341542.2378026622,y=6258926.312196327,crs=EPSG:32756)"
+  },
+  {
+    "objectID": "tutorials/DataTypes.html#ll",
+    "href": "tutorials/DataTypes.html#ll",
+    "title": "Data Types",
+    "section": "LL",
+    "text": "LL\nThe lat,lon data type is there for convience and to make it explicit about what is latitude, what is longitude.\n\nll = geotypes.geometry.LL(-33.79798000,151.28826000)\nprint(ll)\n# Convert to geopoint\np = ll.to_geopoint()\nprint(p)\n\nLL(lat=-33.79798, lon=151.28826)\nGeoPoint(x=151.28826,y=-33.79798,crs=EPSG:4326)\n\n\n\nGeoPath\nA path in geographic space, effectively a geopandas geoseries / shapely linestring with an associated CRS. It is commonly used to represent sampling transects (such as AUV transects). It has some convient functions to collect samples at set distances along the path - which can be done no-matter what\n\n# Define a set of points. This is a simple broad grid in CRS \"EPSG:32756\"\npoints = [(342041.99358729343, 6259392.849573873),\n (342495.27623430215, 6259603.771833958),\n (342579.64503957686, 6259422.458960008),\n (342126.36269032373, 6259211.536449324),\n (342210.73189359176, 6259030.223443877),\n (342664.01394509675, 6259241.146205157)]\n\n# create the geopath object\ngeopath = geotypes.geometry.GeoPath(points, crs=\"EPSG:32756\")\nprint(geopath)\n\n# Iterating over it returns a geopoint.\nprint(\"Geopoints:\")\nfor p in geopath:\n    print(p)\nprint(\"\\n\")\n\n# Easily convert to other crs\ngeopath4326 = geopath.to_crs(\"EPSG:4326\")\nprint(geopath4326)\n\n# Sample points along the geopath\ngeopath_subsampled = geopath.sample_points_along_path(d=20) # sample a point every 20 meters.\nprint(\"Number of points in original {}, in subsampled {}\".format(len(geopath), len(geopath_subsampled)))\n\nGeoPath (crs= EPSG:32756): \n    (342041.99358729343, 6259392.849573873)\n    (342495.27623430215, 6259603.771833958)\n    (342579.64503957686, 6259422.458960008)\n    (342126.36269032373, 6259211.536449324)\n    (342210.73189359176, 6259030.223443877)\n    (342664.01394509675, 6259241.146205157)\n\nGeopoints:\nGeoPoint(x=342041.99358729343,y=6259392.849573873,crs=EPSG:32756)\nGeoPoint(x=342495.27623430215,y=6259603.771833958,crs=EPSG:32756)\nGeoPoint(x=342579.64503957686,y=6259422.458960008,crs=EPSG:32756)\nGeoPoint(x=342126.36269032373,y=6259211.536449324,crs=EPSG:32756)\nGeoPoint(x=342210.73189359176,y=6259030.223443877,crs=EPSG:32756)\nGeoPoint(x=342664.01394509675,y=6259241.146205157,crs=EPSG:32756)\n\n\nGeoPath (crs= EPSG:4326): \n    (151.2937399882331, -33.79384884712429)\n    (151.29867207410172, -33.79201494327435)\n    (151.2995507283774, -33.793662084087515)\n    (151.2946185667885, -33.795496022572)\n    (151.29549717899934, -33.797143191322725)\n    (151.30042941631163, -33.7953092181998)\n\nNumber of points in original 6, in subsampled 95\n\n\n\n\nGeoArea\nA GeoArea is a wrapper around a geopandas GeoSeries with just one element, a polygon or multipolygon. They are used within the situ framework to represent sampling bounds or focal areas. As such, they have easy access to random sampling.\n\n# Define a geoarea\ngeoarea = geotypes.geometry.GeoArea([(151.28412747953516, -33.78781691040293),\n (151.30572252046485, -33.78781691040293),\n (151.30572478467255, -33.805848131225765),\n (151.28412521532746, -33.805848131225765),\n (151.28412747953516, -33.78781691040293)], crs='EPSG:4326')\n\n# get some samples from within it - these are GeoPoints:\nfor n in range(5):\n    print(geoarea.random_point_geo())\n# you can get also get points directly as LLs, regardless of the CRS.\nfor n in range(5):\n    print(geoarea.random_point_ll())\n\nGeoPoint(x=151.30020242178347,y=-33.78922404592678,crs=EPSG:4326)\nGeoPoint(x=151.28622164423567,y=-33.80260967226125,crs=EPSG:4326)\nGeoPoint(x=151.3051581370423,y=-33.79769333597564,crs=EPSG:4326)\nGeoPoint(x=151.2907319212945,y=-33.80119453539296,crs=EPSG:4326)\nGeoPoint(x=151.3014452881778,y=-33.80002746268745,crs=EPSG:4326)\nLL(lat=-33.79903137500317, lon=151.3032352521167)\nLL(lat=-33.79032258219548, lon=151.2971890468687)\nLL(lat=-33.802069867335, lon=151.28755613264838)\nLL(lat=-33.79611942282693, lon=151.29250630774257)\nLL(lat=-33.80493653206971, lon=151.2946950074714)\n\n\n\n# Plot the overall area on the map\nimport folium\n# Plot the area\nm = geoarea.explore(style_kwds={'fill': False, 'color':'green'})\n# Plot the geopath\ngeopath.explore(m=m)\n# Plot the samples along the geopath\ngeotypes.geometry.GeoPoints(geopath.sample_points_along_path(50).to_geopoints()).explore(m=m)\n# Plot some random samples from the geoarea\ngeotypes.geometry.GeoPoints([geoarea.random_point_ll() for _ in range(10)]).explore(m=m, style_kwds={'color':'red'})\nfolium.LayerControl().add_to(m)\ndisplay(m)\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook"
+  },
+  {
+    "objectID": "tutorials/DataTypes.html#local-equivalents",
+    "href": "tutorials/DataTypes.html#local-equivalents",
+    "title": "Data Types",
+    "section": "Local Equivalents",
+    "text": "Local Equivalents\nThere are local equivalents to the classes presented above. These include: - XY: Equivalent of GeoPoint - LocalPoints: Equivalent of GeoPoints - LocalPath: Equivalent of GeoPath - LocalArea: Equivalent of GeoArea These are just wrappers around the shapely geometry classes, but offer some extra functionality, including being able to convert to and from the Geo equivalents.\n\norigin_ll = geoarea.centroid_ll()\n# Convert the position to local\nxy = p.to_local(origin_ll)\n# Now go back to GeoPoint, this time with a different CRS.\npll = xy.to_geo(origin_ll, \"epsg:4326\")\n# Print all to compare\nprint(p, xy, pll)\n\n\n# Convert a GeoPath to a LocalPath\nlocalpath = geopath.to_local(origin_ll)\n# And go back again\ngeopath2 = localpath.to_geo(origin_ll, geopath.crs)\n\nGeoPoint(x=342664.01394509675,y=6259241.146205157,crs=EPSG:32756) XY(x=509.7408123251043, y=168.9840842232932) GeoPoint(x=151.30042941631163,y=-33.7953092181998,crs=epsg:4326)\n\n\n/home/jhs/environments/general/lib/python3.10/site-packages/geotypes/geometry.py:1409: UserWarning:\n\nGeometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation."
+  },
+  {
+    "objectID": "tutorials/Rasters.html",
+    "href": "tutorials/Rasters.html",
+    "title": "Rasters",
+    "section": "",
+    "text": "GeoTypes uses rasterio for raster operations with a wrapper (the Raster class) around these operations to allow easier functionality. This includes: * Extracting values from the value at a given GeoPoint or LL, even if they are in a different CRS. * Extracting patches of a set size at a given GeoPoint or LL, even if they are in a different CRS. * Returning the bounds as a GeoArea.\nThese capabilities are integrated into the RasterRegistry class to make it easier to get data from multiple rasters.\nfrom geotypes.rasters import Raster, RasterRegistry\nr = Raster('example.tif')\nr\n\nRaster(\"Path=example.tif\",\"crs=EPSG:4326\",size(552,620,))"
+  },
+  {
+    "objectID": "tutorials/Rasters.html#extracting-data-from-a-raster",
+    "href": "tutorials/Rasters.html#extracting-data-from-a-raster",
+    "title": "Rasters",
+    "section": "Extracting data from a raster",
+    "text": "Extracting data from a raster\nYou can either extract points or patches of a set size from a raster. If the data is invalid (no data value or out of bounds) it will return None, including for the entire patch. If this is an issue when using patches, consider filling the raster first (i.e. using qgis).\n\n# Get the bounds as a GeoArea\narea = r.get_bounds_as_geoarea()\nfor _ in range(10):\n    p = area.random_point_geo()\n    print(\"Depth\", r.get_value(p))\n\n# Get some patches\nfor _ in range(10):\n    p = area.random_point_geo()\n    patch = r.extract_patch_geo(p, width=5,height=5)\n    if patch is not None:\n        print(f\"Patch mean={patch.mean()}\")\n\n\nDepth [-31.409237]\nDepth [-34.234123]\nDepth [-3.4028235e+38]\nDepth [-30.973043]\nDepth [-3.4028235e+38]\nDepth [-8.84387]\nDepth [-36.756977]\nDepth [-3.4028235e+38]\nDepth [-35.469486]\nDepth [-36.298344]\nPatch mean=-35.81536865234375\nPatch mean=-33.3203010559082\nPatch mean=-23.544713973999023\nPatch mean=-37.140865325927734\nPatch mean=-8.296087265014648\nPatch mean=-31.775911331176758\nPatch mean=-37.30376052856445\nPatch mean=-11.780535697937012"
+  },
+  {
+    "objectID": "tutorials/Rasters.html#rasterregistry",
+    "href": "tutorials/Rasters.html#rasterregistry",
+    "title": "Rasters",
+    "section": "RasterRegistry",
+    "text": "RasterRegistry\nA raster registry is a convenient way to store and operate on collections of rasters. Typically, these rasters each hold features, i.e. raster 1 holds depth, raster 2 holds slope.\n\n# to load a raster registry, you need to specify the filepaths and the size of the patches to be extracted. This can be [1,1] for a single patch.\nimport yaml\n# this is a yaml file example to load the config. We are just using the same example bathymetry patch as reference.\nyaml_str = \"\"\"\nbathy: \n    path: \"example.tif\"\n    size: [1,1]\ndepth: \n    path: \"example.tif\"\n    size: [1,1]\n\"\"\"\nraster_cfg = yaml.safe_load(yaml_str)\nraster_registry = RasterRegistry(raster_cfg)\n\n# This raster registry is passed into the feature extractor to provide access to the rasters\n\n\nraster_registry.get_named_patches(p)\n\n{'bathy': array([[-11.78369]], dtype=float32),\n 'depth': array([[-11.78369]], dtype=float32)}"
+  }
+]

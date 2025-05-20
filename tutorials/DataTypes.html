@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>geotypes - Data Types</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">geotypes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-getting-started" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Getting Started</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-getting-started">    
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="../tutorials/DataTypes.html" rel="" target="">
+ <span class="dropdown-text">Data Types</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reference" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Reference</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-reference">    
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/jacksonhshields/geotypes">
+            Source code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/jacksonhshields/geotypes/new?assignees=&amp;labels=bug&amp;projects=&amp;template=bug-report.yml&amp;title=bug">
+            Report a bug
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/jacksonhshields/geotypes/new?assignees=&amp;labels=docs&amp;projects=&amp;template=docs-issue.yml&amp;title=docs">
+            Report a documentation issue
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/jacksonhshields/geotypes/new?assignees=&amp;labels=feature&amp;projects=&amp;template=feature-request.yml&amp;title=feat">
+            Submit a feature request
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/jacksonhshields/geotypes/discussions/new?category=q-a">
+            Ask the community for help
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/DataTypes.html">Data Types</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/DataTypes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Data Types</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Types</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Geotypes adds some high-level wrappers around geopandas and shapely to allow for easier use. They allow easy conversion between georeference schemes, better tracking of what coordinate system the variables are in and easy conversion between types. These include:</p>
+<ul>
+<li>GeoPoint</li>
+<li>LL</li>
+<li>GeoPath</li>
+<li>GeoPoints</li>
+<li>GeoArea</li>
+<li>XY</li>
+<li>LocalPath</li>
+<li>LocalPoints</li>
+<li>LocalArea</li>
+</ul>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geotypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="geopoint" class="level2">
+<h2 class="anchored" data-anchor-id="geopoint">GeoPoint</h2>
+<p>The GeoPoint is an x,y coordinate with an associated Coordinate Reference System (CRS). It allows easy conversion to LL and XY data types.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> geotypes.geometry.GeoPoint(x<span class="op">=</span><span class="fl">151.28826000</span>, y<span class="op">=-</span><span class="fl">33.79798000</span>, crs<span class="op">=</span><span class="st">"epsg:4326"</span>) <span class="co"># initialise a lat, lon centred in Manly.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"GeoPoint"</span>, p)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> p.to_ll() <span class="co"># Converts to lat,lon data type</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"In LL"</span>, ll)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>p_utm <span class="op">=</span> p.to_crs(<span class="st">"EPSG:32756"</span>)  <span class="co"># converts to utm zone 56S</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"In UTM Zone 56S"</span>, p_utm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GeoPoint GeoPoint(x=151.28826,y=-33.79798,crs=epsg:4326)
+In LL LL(lat=-33.79798, lon=151.28826)
+In UTM Zone 56S GeoPoint(x=341542.2378026622,y=6258926.312196327,crs=EPSG:32756)</code></pre>
+</div>
+</div>
+</section>
+<section id="ll" class="level2">
+<h2 class="anchored" data-anchor-id="ll">LL</h2>
+<p>The lat,lon data type is there for convience and to make it explicit about what is latitude, what is longitude.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> geotypes.geometry.LL(<span class="op">-</span><span class="fl">33.79798000</span>,<span class="fl">151.28826000</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ll)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to geopoint</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ll.to_geopoint()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LL(lat=-33.79798, lon=151.28826)
+GeoPoint(x=151.28826,y=-33.79798,crs=EPSG:4326)</code></pre>
+</div>
+</div>
+<section id="geopath" class="level3">
+<h3 class="anchored" data-anchor-id="geopath">GeoPath</h3>
+<p>A path in geographic space, effectively a geopandas geoseries / shapely linestring with an associated CRS. It is commonly used to represent sampling transects (such as AUV transects). It has some convient functions to collect samples at set distances along the path - which can be done no-matter what</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a set of points. This is a simple broad grid in CRS "EPSG:32756"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> [(<span class="fl">342041.99358729343</span>, <span class="fl">6259392.849573873</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> (<span class="fl">342495.27623430215</span>, <span class="fl">6259603.771833958</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> (<span class="fl">342579.64503957686</span>, <span class="fl">6259422.458960008</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> (<span class="fl">342126.36269032373</span>, <span class="fl">6259211.536449324</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> (<span class="fl">342210.73189359176</span>, <span class="fl">6259030.223443877</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> (<span class="fl">342664.01394509675</span>, <span class="fl">6259241.146205157</span>)]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create the geopath object</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>geopath <span class="op">=</span> geotypes.geometry.GeoPath(points, crs<span class="op">=</span><span class="st">"EPSG:32756"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(geopath)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterating over it returns a geopoint.</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Geopoints:"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> geopath:</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(p)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Easily convert to other crs</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>geopath4326 <span class="op">=</span> geopath.to_crs(<span class="st">"EPSG:4326"</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(geopath4326)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample points along the geopath</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>geopath_subsampled <span class="op">=</span> geopath.sample_points_along_path(d<span class="op">=</span><span class="dv">20</span>) <span class="co"># sample a point every 20 meters.</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of points in original </span><span class="sc">{}</span><span class="st">, in subsampled </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="bu">len</span>(geopath), <span class="bu">len</span>(geopath_subsampled)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GeoPath (crs= EPSG:32756): 
+    (342041.99358729343, 6259392.849573873)
+    (342495.27623430215, 6259603.771833958)
+    (342579.64503957686, 6259422.458960008)
+    (342126.36269032373, 6259211.536449324)
+    (342210.73189359176, 6259030.223443877)
+    (342664.01394509675, 6259241.146205157)
+
+Geopoints:
+GeoPoint(x=342041.99358729343,y=6259392.849573873,crs=EPSG:32756)
+GeoPoint(x=342495.27623430215,y=6259603.771833958,crs=EPSG:32756)
+GeoPoint(x=342579.64503957686,y=6259422.458960008,crs=EPSG:32756)
+GeoPoint(x=342126.36269032373,y=6259211.536449324,crs=EPSG:32756)
+GeoPoint(x=342210.73189359176,y=6259030.223443877,crs=EPSG:32756)
+GeoPoint(x=342664.01394509675,y=6259241.146205157,crs=EPSG:32756)
+
+
+GeoPath (crs= EPSG:4326): 
+    (151.2937399882331, -33.79384884712429)
+    (151.29867207410172, -33.79201494327435)
+    (151.2995507283774, -33.793662084087515)
+    (151.2946185667885, -33.795496022572)
+    (151.29549717899934, -33.797143191322725)
+    (151.30042941631163, -33.7953092181998)
+
+Number of points in original 6, in subsampled 95</code></pre>
+</div>
+</div>
+</section>
+<section id="geoarea" class="level3">
+<h3 class="anchored" data-anchor-id="geoarea">GeoArea</h3>
+<p>A GeoArea is a wrapper around a geopandas GeoSeries with just one element, a polygon or multipolygon. They are used within the situ framework to represent sampling bounds or focal areas. As such, they have easy access to random sampling.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a geoarea</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>geoarea <span class="op">=</span> geotypes.geometry.GeoArea([(<span class="fl">151.28412747953516</span>, <span class="op">-</span><span class="fl">33.78781691040293</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> (<span class="fl">151.30572252046485</span>, <span class="op">-</span><span class="fl">33.78781691040293</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> (<span class="fl">151.30572478467255</span>, <span class="op">-</span><span class="fl">33.805848131225765</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> (<span class="fl">151.28412521532746</span>, <span class="op">-</span><span class="fl">33.805848131225765</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> (<span class="fl">151.28412747953516</span>, <span class="op">-</span><span class="fl">33.78781691040293</span>)], crs<span class="op">=</span><span class="st">'EPSG:4326'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get some samples from within it - these are GeoPoints:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(geoarea.random_point_geo())</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># you can get also get points directly as LLs, regardless of the CRS.</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(geoarea.random_point_ll())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GeoPoint(x=151.30020242178347,y=-33.78922404592678,crs=EPSG:4326)
+GeoPoint(x=151.28622164423567,y=-33.80260967226125,crs=EPSG:4326)
+GeoPoint(x=151.3051581370423,y=-33.79769333597564,crs=EPSG:4326)
+GeoPoint(x=151.2907319212945,y=-33.80119453539296,crs=EPSG:4326)
+GeoPoint(x=151.3014452881778,y=-33.80002746268745,crs=EPSG:4326)
+LL(lat=-33.79903137500317, lon=151.3032352521167)
+LL(lat=-33.79032258219548, lon=151.2971890468687)
+LL(lat=-33.802069867335, lon=151.28755613264838)
+LL(lat=-33.79611942282693, lon=151.29250630774257)
+LL(lat=-33.80493653206971, lon=151.2946950074714)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the overall area on the map</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the area</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> geoarea.explore(style_kwds<span class="op">=</span>{<span class="st">'fill'</span>: <span class="va">False</span>, <span class="st">'color'</span>:<span class="st">'green'</span>})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the geopath</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>geopath.explore(m<span class="op">=</span>m)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the samples along the geopath</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>geotypes.geometry.GeoPoints(geopath.sample_points_along_path(<span class="dv">50</span>).to_geopoints()).explore(m<span class="op">=</span>m)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot some random samples from the geoarea</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>geotypes.geometry.GeoPoints([geoarea.random_point_ll() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]).explore(m<span class="op">=</span>m, style_kwds<span class="op">=</span>{<span class="st">'color'</span>:<span class="st">'red'</span>})</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>folium.LayerControl().add_to(m)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>display(m)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;></script>
+    <script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/>
+    
+            <meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
+            <style>
+                #map_31053f003d61f0bb4dccd9fd9e6436ef {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class=&quot;folium-map&quot; id=&quot;map_31053f003d61f0bb4dccd9fd9e6436ef&quot; ></div>
+        
+</body>
+<script>
+    
+    
+            var map_31053f003d61f0bb4dccd9fd9e6436ef = L.map(
+                &quot;map_31053f003d61f0bb4dccd9fd9e6436ef&quot;,
+                {
+                    center: [-33.79683252081435, 151.294925],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;maxBounds&quot;: null,
+  &quot;zoom&quot;: 10,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+
+            
+
+        
+    
+            var tile_layer_7b4d4ea5719574c01697ce6bcbc2b483 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_7b4d4ea5719574c01697ce6bcbc2b483.addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+        
+    
+            map_31053f003d61f0bb4dccd9fd9e6436ef.fitBounds(
+                [[-33.805848131225765, 151.28412521532746], [-33.78781691040293, 151.30572478467255]],
+                {}
+            );
+        
+    
+        function geo_json_71825ec6fcce18b55d40809f9ade32e9_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;color&quot;: &quot;green&quot;, &quot;fill&quot;: false, &quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_71825ec6fcce18b55d40809f9ade32e9_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_71825ec6fcce18b55d40809f9ade32e9_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+            
+            let style = geo_json_71825ec6fcce18b55d40809f9ade32e9_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_71825ec6fcce18b55d40809f9ade32e9_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                            geo_json_71825ec6fcce18b55d40809f9ade32e9.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_71825ec6fcce18b55d40809f9ade32e9_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_71825ec6fcce18b55d40809f9ade32e9 = L.geoJson(null, {
+                onEachFeature: geo_json_71825ec6fcce18b55d40809f9ade32e9_onEachFeature,
+            
+                style: geo_json_71825ec6fcce18b55d40809f9ade32e9_styler,
+                pointToLayer: geo_json_71825ec6fcce18b55d40809f9ade32e9_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_71825ec6fcce18b55d40809f9ade32e9_add (data) {
+            geo_json_71825ec6fcce18b55d40809f9ade32e9
+                .addData(data);
+        }
+            geo_json_71825ec6fcce18b55d40809f9ade32e9_add({&quot;bbox&quot;: [151.28412521532746, -33.805848131225765, 151.30572478467255, -33.78781691040293], &quot;features&quot;: [{&quot;bbox&quot;: [151.28412521532746, -33.805848131225765, 151.30572478467255, -33.78781691040293], &quot;geometry&quot;: {&quot;coordinates&quot;: [[[151.28412747953516, -33.78781691040293], [151.30572252046485, -33.78781691040293], [151.30572478467255, -33.805848131225765], [151.28412521532746, -33.805848131225765], [151.28412747953516, -33.78781691040293]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+    
+            geo_json_71825ec6fcce18b55d40809f9ade32e9.addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+        
+    
+        function geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+            
+            let style = geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                            geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f = L.geoJson(null, {
+                onEachFeature: geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_onEachFeature,
+            
+                style: geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_styler,
+                pointToLayer: geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_add (data) {
+            geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f
+                .addData(data);
+        }
+            geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f_add({&quot;bbox&quot;: [151.2937399882331, -33.797143191322725, 151.30042941631163, -33.79201494327435], &quot;features&quot;: [{&quot;bbox&quot;: [151.2937399882331, -33.797143191322725, 151.30042941631163, -33.79201494327435], &quot;geometry&quot;: {&quot;coordinates&quot;: [[151.2937399882331, -33.79384884712429], [151.29867207410172, -33.79201494327435], [151.2995507283774, -33.793662084087515], [151.2946185667885, -33.795496022572], [151.29549717899934, -33.797143191322725], [151.30042941631163, -33.7953092181998]], &quot;type&quot;: &quot;LineString&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+    
+            geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f.addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+        
+    
+        function geo_json_cae18680dd9ca7882853caed79babfb0_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_cae18680dd9ca7882853caed79babfb0_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_cae18680dd9ca7882853caed79babfb0_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+            
+            let style = geo_json_cae18680dd9ca7882853caed79babfb0_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_cae18680dd9ca7882853caed79babfb0_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                            geo_json_cae18680dd9ca7882853caed79babfb0.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_cae18680dd9ca7882853caed79babfb0_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_cae18680dd9ca7882853caed79babfb0 = L.geoJson(null, {
+                onEachFeature: geo_json_cae18680dd9ca7882853caed79babfb0_onEachFeature,
+            
+                style: geo_json_cae18680dd9ca7882853caed79babfb0_styler,
+                pointToLayer: geo_json_cae18680dd9ca7882853caed79babfb0_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_cae18680dd9ca7882853caed79babfb0_add (data) {
+            geo_json_cae18680dd9ca7882853caed79babfb0
+                .addData(data);
+        }
+            geo_json_cae18680dd9ca7882853caed79babfb0_add({&quot;bbox&quot;: [151.2937399882331, -33.79714319132093, 151.29993620205605, -33.792014943274715], &quot;features&quot;: [{&quot;bbox&quot;: [151.2937399882331, -33.79384884712429, 151.2937399882331, -33.79384884712429], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2937399882331, -33.79384884712429], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29423320628445, -33.793665465636245, 151.29423320628445, -33.793665465636245], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29423320628445, -33.793665465636245], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29472642223263, -33.793482082170996, 151.29472642223263, -33.793482082170996], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29472642223263, -33.793482082170996], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;2&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2952196360776, -33.79329869672858, 151.2952196360776, -33.79329869672858], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2952196360776, -33.79329869672858], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;3&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29571284781943, -33.79311530930903, 151.29571284781943, -33.79311530930903], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29571284781943, -33.79311530930903], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;4&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29620605745802, -33.79293191991238, 151.29620605745802, -33.79293191991238], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29620605745802, -33.79293191991238], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;5&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2966992649934, -33.79274852853869, 151.2966992649934, -33.79274852853869], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2966992649934, -33.79274852853869], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;6&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29719247042553, -33.79256513518797, 151.29719247042553, -33.79256513518797], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29719247042553, -33.79256513518797], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;7&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29768567375436, -33.79238173986029, 151.29768567375436, -33.79238173986029], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29768567375436, -33.79238173986029], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;8&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29817887497993, -33.792198342555686, 151.29817887497993, -33.792198342555686], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29817887497993, -33.792198342555686], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;9&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29867207410194, -33.792014943274715, 151.29867207410194, -33.792014943274715], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29867207410194, -33.792014943274715], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;10&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29889173451602, -33.792426729106616, 151.29889173451602, -33.792426729106616], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29889173451602, -33.792426729106616], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;11&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2991113970335, -33.79283851451986, 151.2991113970335, -33.79283851451986], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2991113970335, -33.79283851451986], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;12&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2993310616544, -33.79325029951438, 151.2993310616544, -33.79325029951438], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2993310616544, -33.79325029951438], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;13&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29955072837416, -33.79366208408873, 151.29955072837416, -33.79366208408873], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29955072837416, -33.79366208408873], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;14&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29905752168077, -33.793845486834094, 151.29905752168077, -33.793845486834094], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29905752168077, -33.793845486834094], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;15&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2985643128838, -33.79402888760248, 151.2985643128838, -33.79402888760248], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2985643128838, -33.79402888760248], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;16&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29807110198334, -33.79421228639388, 151.29807110198334, -33.79421228639388], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29807110198334, -33.79421228639388], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;17&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29757788897936, -33.79439568320825, 151.29757788897936, -33.79439568320825], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29757788897936, -33.79439568320825], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;18&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2970846738719, -33.79457907804551, 151.2970846738719, -33.79457907804551], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2970846738719, -33.79457907804551], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;19&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29659145666093, -33.794762470905624, 151.29659145666093, -33.794762470905624], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29659145666093, -33.794762470905624], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;20&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29609823734654, -33.794945861788605, 151.29609823734654, -33.794945861788605], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29609823734654, -33.794945861788605], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;21&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29560501592871, -33.79512925069437, 151.29560501592871, -33.79512925069437], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29560501592871, -33.79512925069437], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;22&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29511179240745, -33.79531263762289, 151.29511179240745, -33.79531263762289], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29511179240745, -33.79531263762289], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;23&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29461856679103, -33.79549602257675, 151.29461856679103, -33.79549602257675], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29461856679103, -33.79549602257675], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;24&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29483821668845, -33.79590781539201, 151.29483821668845, -33.79590781539201], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29483821668845, -33.79590781539201], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;25&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29505786868927, -33.79631960778879, 151.29505786868927, -33.79631960778879], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29505786868927, -33.79631960778879], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;26&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2952775227936, -33.79673139976705, 151.2952775227936, -33.79673139976705], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2952775227936, -33.79673139976705], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;27&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29549717900417, -33.79714319132093, 151.29549717900417, -33.79714319132093], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29549717900417, -33.79714319132093], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;28&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29599041220243, -33.796959802906116, 151.29599041220243, -33.796959802906116], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29599041220243, -33.796959802906116], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;29&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29648364329705, -33.796776412513935, 151.29648364329705, -33.796776412513935], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29648364329705, -33.796776412513935], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;30&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.296976872288, -33.79659302014444, 151.296976872288, -33.79659302014444], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.296976872288, -33.79659302014444], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;31&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2974700991753, -33.79640962579766, 151.2974700991753, -33.79640962579766], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2974700991753, -33.79640962579766], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;32&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29796332395892, -33.79622622947364, 151.29796332395892, -33.79622622947364], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29796332395892, -33.79622622947364], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;33&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29845654663882, -33.79604283117242, 151.29845654663882, -33.79604283117242], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29845654663882, -33.79604283117242], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;34&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29894976721496, -33.79585943089404, 151.29894976721496, -33.79585943089404], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29894976721496, -33.79585943089404], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;35&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.2994429856874, -33.79567602863854, 151.2994429856874, -33.79567602863854], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.2994429856874, -33.79567602863854], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;36&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29993620205605, -33.795492624405966, 151.29993620205605, -33.795492624405966], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29993620205605, -33.795492624405966], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;37&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+    
+            geo_json_cae18680dd9ca7882853caed79babfb0.addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+        
+    
+        function geo_json_1a110920aa1f896ccd044219115f37f3_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;color&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.5, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_1a110920aa1f896ccd044219115f37f3_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0.75};
+            }
+        }
+        function geo_json_1a110920aa1f896ccd044219115f37f3_pointToLayer(feature, latlng) {
+            var opts = {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 2, &quot;stroke&quot;: true, &quot;weight&quot;: 3};
+            
+            let style = geo_json_1a110920aa1f896ccd044219115f37f3_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_1a110920aa1f896ccd044219115f37f3_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                            geo_json_1a110920aa1f896ccd044219115f37f3.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_1a110920aa1f896ccd044219115f37f3_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_1a110920aa1f896ccd044219115f37f3 = L.geoJson(null, {
+                onEachFeature: geo_json_1a110920aa1f896ccd044219115f37f3_onEachFeature,
+            
+                style: geo_json_1a110920aa1f896ccd044219115f37f3_styler,
+                pointToLayer: geo_json_1a110920aa1f896ccd044219115f37f3_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_1a110920aa1f896ccd044219115f37f3_add (data) {
+            geo_json_1a110920aa1f896ccd044219115f37f3
+                .addData(data);
+        }
+            geo_json_1a110920aa1f896ccd044219115f37f3_add({&quot;bbox&quot;: [151.28471062682104, -33.80535829057561, 151.30482653824592, -33.78858947346288], &quot;features&quot;: [{&quot;bbox&quot;: [151.29310143817568, -33.79828417749432, 151.29310143817568, -33.79828417749432], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29310143817568, -33.79828417749432], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.28510178855007, -33.79063119664565, 151.28510178855007, -33.79063119664565], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.28510178855007, -33.79063119664565], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;1&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29964069118427, -33.80440384899496, 151.29964069118427, -33.80440384899496], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29964069118427, -33.80440384899496], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;2&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29283211714295, -33.78858947346288, 151.29283211714295, -33.78858947346288], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29283211714295, -33.78858947346288], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;3&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.3032933129392, -33.789454752249455, 151.3032933129392, -33.789454752249455], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.3032933129392, -33.789454752249455], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;4&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.30482653824592, -33.80134230150292, 151.30482653824592, -33.80134230150292], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.30482653824592, -33.80134230150292], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;5&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.3010987601212, -33.792816188840014, 151.3010987601212, -33.792816188840014], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.3010987601212, -33.792816188840014], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;6&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.28471062682104, -33.79837988465524, 151.28471062682104, -33.79837988465524], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.28471062682104, -33.79837988465524], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;7&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.28752273128282, -33.80535829057561, 151.28752273128282, -33.80535829057561], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.28752273128282, -33.80535829057561], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;8&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}, {&quot;bbox&quot;: [151.29619074899614, -33.792676886464164, 151.29619074899614, -33.792676886464164], &quot;geometry&quot;: {&quot;coordinates&quot;: [151.29619074899614, -33.792676886464164], &quot;type&quot;: &quot;Point&quot;}, &quot;id&quot;: &quot;9&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+    
+            geo_json_1a110920aa1f896ccd044219115f37f3.addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+        
+    
+            var layer_control_e1953d88aa1a33a5dbc48abbb60ea8e4_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_7b4d4ea5719574c01697ce6bcbc2b483,
+                },
+                overlays :  {
+                    &quot;macro_element_71825ec6fcce18b55d40809f9ade32e9&quot; : geo_json_71825ec6fcce18b55d40809f9ade32e9,
+                    &quot;macro_element_1bdd6699845a2f3f11f5cc10b83ddc9f&quot; : geo_json_1bdd6699845a2f3f11f5cc10b83ddc9f,
+                    &quot;macro_element_cae18680dd9ca7882853caed79babfb0&quot; : geo_json_cae18680dd9ca7882853caed79babfb0,
+                    &quot;macro_element_1a110920aa1f896ccd044219115f37f3&quot; : geo_json_1a110920aa1f896ccd044219115f37f3,
+                },
+            };
+            let layer_control_e1953d88aa1a33a5dbc48abbb60ea8e4 = L.control.layers(
+                layer_control_e1953d88aa1a33a5dbc48abbb60ea8e4_layers.base_layers,
+                layer_control_e1953d88aa1a33a5dbc48abbb60ea8e4_layers.overlays,
+                {
+  &quot;position&quot;: &quot;topright&quot;,
+  &quot;collapsed&quot;: true,
+  &quot;autoZIndex&quot;: true,
+}
+            ).addTo(map_31053f003d61f0bb4dccd9fd9e6436ef);
+
+        
+</script>
+</html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></div></div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-equivalents" class="level2">
+<h2 class="anchored" data-anchor-id="local-equivalents">Local Equivalents</h2>
+<p>There are local equivalents to the classes presented above. These include: - XY: Equivalent of GeoPoint - LocalPoints: Equivalent of GeoPoints - LocalPath: Equivalent of GeoPath - LocalArea: Equivalent of GeoArea These are just wrappers around the shapely geometry classes, but offer some extra functionality, including being able to convert to and from the Geo equivalents.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>origin_ll <span class="op">=</span> geoarea.centroid_ll()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the position to local</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>xy <span class="op">=</span> p.to_local(origin_ll)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now go back to GeoPoint, this time with a different CRS.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>pll <span class="op">=</span> xy.to_geo(origin_ll, <span class="st">"epsg:4326"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all to compare</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p, xy, pll)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a GeoPath to a LocalPath</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>localpath <span class="op">=</span> geopath.to_local(origin_ll)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># And go back again</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>geopath2 <span class="op">=</span> localpath.to_geo(origin_ll, geopath.crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GeoPoint(x=342664.01394509675,y=6259241.146205157,crs=EPSG:32756) XY(x=509.7408123251043, y=168.9840842232932) GeoPoint(x=151.30042941631163,y=-33.7953092181998,crs=epsg:4326)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/jhs/environments/general/lib/python3.10/site-packages/geotypes/geometry.py:1409: UserWarning:
+
+Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
