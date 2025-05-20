@@ -593,7 +593,7 @@ if __name__ == "__main__":
         # query_point = [float(x) for x in args.query.split(',')]
 
         ll = LL(-39.01794,143.59151)
-        r = raster.get_value_at_ll(ll, band=1)
+        r = raster.get_value(ll, band=1)
         print(r)
         patch = raster.extract_patch_ll(ll, width=11, height=11, band=1)
         print(patch)
