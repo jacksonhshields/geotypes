@@ -1,14 +1,28 @@
 # geotypes
 
-geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis.
+geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis. It wraps GeoPandas and rasterio with simple data types to make it easier and more pythonic to work with for some applications.
 
 Visit the [documentation](https://jacksonhshields.github.io/geotypes/) for installation, getting started, tutorials and API reference.
+
+## Installation
+Use pip to install geotypes. 
+
+GDAL is not added to the requirements. If you already have libgdal-dev installed, you can use:
+```
+gdalversion=$(gdalinfo --version | cut -d\  -f2 | sed s'#,##') && pip3 install GDAL==$gdalversion
+```
+
+
+
+With GDAL installed or not, you can install geotypes with:
+```bash
+pip install git@github.com:jacksonhshields/geotypes.git
+
+```
 
 
 ## Tutorials
 
 To get started with geotypes, check out the tutorials, which run you through the data types and how to use them.
-
-
 
 

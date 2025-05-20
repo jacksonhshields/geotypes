@@ -51,7 +51,7 @@ website:
       collapse-level: 2
       contents:
           - tutorials/DataTypes.ipynb
-          # - tutorials/Rasters.ipynb
+          - tutorials/Rasters.ipynb
     - id: reference
       title: "Reference"
       style: "docked"
