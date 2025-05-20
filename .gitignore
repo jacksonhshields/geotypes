@@ -1,0 +1,7 @@
+docs/.quarto/
+docs/_site/
+build/
+*.egg-info/
+*.egg-info
+*.pyc
+*.pyo
