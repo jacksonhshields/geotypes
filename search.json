@@ -4,7 +4,14 @@
     "href": "index.html",
     "title": "geotypes",
     "section": "",
-    "text": "geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis.\nVisit the documentation for installation, getting started, tutorials and API reference.\n\n\nTo get started with geotypes, check out the tutorials, which run you through the data types and how to use them."
+    "text": "geotypes is a python package for making it easy to work with geospatial data, particularly useful for geospatial planning and analysis. It wraps GeoPandas and rasterio with simple data types to make it easier and more pythonic to work with for some applications.\nVisit the documentation for installation, getting started, tutorials and API reference.\n\n\nUse pip to install geotypes.\nGDAL is not added to the requirements. If you already have libgdal-dev installed, you can use:\ngdalversion=$(gdalinfo --version | cut -d\\  -f2 | sed s'#,##') && pip3 install GDAL==$gdalversion\nWith GDAL installed or not, you can install geotypes with:\npip install git@github.com:jacksonhshields/geotypes.git\n\n\n\nTo get started with geotypes, check out the tutorials, which run you through the data types and how to use them."
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "geotypes",
+    "section": "",
+    "text": "Use pip to install geotypes.\nGDAL is not added to the requirements. If you already have libgdal-dev installed, you can use:\ngdalversion=$(gdalinfo --version | cut -d\\  -f2 | sed s'#,##') && pip3 install GDAL==$gdalversion\nWith GDAL installed or not, you can install geotypes with:\npip install git@github.com:jacksonhshields/geotypes.git"
   },
   {
     "objectID": "index.html#tutorials",
