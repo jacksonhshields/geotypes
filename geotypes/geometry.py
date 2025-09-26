@@ -75,6 +75,15 @@ def check_crs_equal(crs_a, crs_b):
 class LL(GeoType):
     lat: float
     lon: float
+    def __getitem__(self, item : int) -> float:
+        if item == 0:
+            return lat
+        elif item == 1:
+            return lon
+        else:
+            raise IndexError("idx %d not supported")
+
+    
     def __array__(self) -> np.ndarray:
         """
         To array
