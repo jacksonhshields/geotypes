@@ -77,9 +77,9 @@ class LL(GeoType):
     lon: float
     def __getitem__(self, item : int) -> float:
         if item == 0:
-            return lat
+            return self.lat
         elif item == 1:
-            return lon
+            return self.lon
         else:
             raise IndexError("idx %d not supported")
 
