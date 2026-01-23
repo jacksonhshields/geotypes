@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geotypes"
+version = "0.1.0"
+description = "A set of useful utilities for working with geospatial data. Makes it simpler to do common operations."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Jackson Shields", email = "jacksonhshields@gmail.com"}
+]
+maintainers = [
+    {name = "Jackson Shields", email = "jacksonhshields@gmail.com"}
+]
+keywords = ["geospatial", "gis", "geopandas", "rasterio", "shapely", "coordinates", "utm", "navigation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "geopandas",
+    "affine",
+    "rasterio",
+    "pymap3d",
+    "utm",
+    "geopy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "black",
+    "isort",
+    "flake8",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[project.urls]
+Homepage = "https://github.com/jacksonhshields/geotypes"
+Documentation = "https://jacksonhshields.github.io/geotypes/"
+Repository = "https://github.com/jacksonhshields/geotypes.git"
+Issues = "https://github.com/jacksonhshields/geotypes/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
