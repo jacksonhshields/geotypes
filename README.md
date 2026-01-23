@@ -39,6 +39,7 @@ pip install git@github.com:jacksonhshields/geotypes.git
 ```
 
 
+
 ## Tutorials
 
 To get started with geotypes, check out the tutorials, which run you through the data types and how to use them.
@@ -159,3 +160,25 @@ ll = LL(-33.79931, 151.29412)
 r.get_value(ll)
 >>> -7.871370315551758
 ```
+
+
+## CLI: geoconvert
+`geoconvert` converts geographic coordinates between decimal degrees, degrees+minutes, and degrees+minutes+seconds. It is based on GeoConvert, but also does degrees,minutes.
+
+Examples:
+```bash
+# Degrees decimal -> degrees minutes
+geoconvert "33.3 44.4" -m
+geoconvert "33.3,44.4" -m
+
+# Degrees minutes -> degrees decimal
+geoconvert "33d18' 44d24'" -d
+
+# Degrees minutes seconds -> degrees decimal
+geoconvert "33d18'30\" 44d24'45\"" -d
+```
+
+Notes:
+- Input accepts space or comma separated lat/lon.
+- Hemisphere prefixes/suffixes are supported (e.g. `N33.3 E44.4`).
+- Use `-w` to swap lon/lat order when coordinates are ambiguous.
