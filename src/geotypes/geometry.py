@@ -151,14 +151,8 @@ class LL(GeoType):
         Returns:
             LL: The LL
         """
-        if lat_deg < 0:
-            lat = lat_deg - lat_min / 60
-        else:
-            lat = lat_deg + lat_min / 60
-        if lon_deg < 0:
-            lon = lon_deg - lon_min / 60
-        else:
-            lon = lon_deg + lon_min / 60
+        lat = lat_deg + np.sign(lat_deg)*lat_min/60
+        lon = lon_deg + np.sign(lon_deg)*lon_min/60
         return cls(lat=lat, lon=lon)
 
     @classmethod
@@ -177,8 +171,8 @@ class LL(GeoType):
         Returns:
             LL: The LL
         """
-        lat = lat_deg + lat_min / 60 + lat_sec / 3600
-        lon = lon_deg + lon_min / 60 + lon_sec / 3600
+        lat = lat_deg + np.sign(lat_deg)*lat_min / 60 + np.sign(lat_deg)*lat_sec / 3600
+        lon = lon_deg + np.sign(lon_deg)*lon_min / 60 + np.sign(lon_deg)*lon_sec / 3600
         return cls(lat=lat, lon=lon)
 
     def print_degrees_decimal(self):

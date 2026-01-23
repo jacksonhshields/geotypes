@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geotypes"
-version = "0.1.0"
+version = "0.1.1"
 description = "A set of useful utilities for working with geospatial data. Makes it simpler to do common operations."
 readme = "README.md"
 license = {text = "MIT"}
@@ -49,6 +49,8 @@ dev = [
     "black",
     "isort",
     "flake8",
+    "build",
+    "twine",
 ]
 docs = [
     "sphinx",
@@ -60,6 +62,9 @@ Homepage = "https://github.com/jacksonhshields/geotypes"
 Documentation = "https://jacksonhshields.github.io/geotypes/"
 Repository = "https://github.com/jacksonhshields/geotypes.git"
 Issues = "https://github.com/jacksonhshields/geotypes/issues"
+
+[project.scripts]
+geoconvert = "geotypes.cli:geoconvert_main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
