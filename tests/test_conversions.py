@@ -97,6 +97,16 @@ class TestLLPrintMethods:
         assert minutes[0] == pytest.approx(51.6)
         assert minutes[1] == pytest.approx(12.6)
 
+    def test_print_degrees_minutes_sub_degree_negative(self, capsys):
+        # sign must survive when degrees is 0
+        LL(lat=-0.5, lon=-0.25).print_degrees_minutes()
+        out = capsys.readouterr().out
+        assert "Latitude: -0°" in out
+        assert "Longitude: -0°" in out
+        minutes = [float(m) for m in re.findall(r"(\d+(?:\.\d+)?)'", out)]
+        assert minutes[0] == pytest.approx(30.0)
+        assert minutes[1] == pytest.approx(15.0)
+
     def test_print_degrees_minutes_seconds(self, capsys):
         LL(lat=33.31, lon=151.505).print_degrees_minutes_second()
         out = capsys.readouterr().out
@@ -105,6 +115,16 @@ class TestLLPrintMethods:
         assert "18'" in out
         assert "151°" in out
         assert "30'" in out
+
+    def test_print_dms_sub_degree_negative(self, capsys):
+        # -0.51 => -0deg 30min 36sec
+        LL(lat=-0.51, lon=-0.51).print_degrees_minutes_second()
+        out = capsys.readouterr().out
+        assert "Latitude: -0° 30'" in out
+        assert "Longitude: -0° 30'" in out
+        seconds = [float(s) for s in re.findall(r"' (\d+(?:\.\d+)?)''", out)]
+        assert seconds[0] == pytest.approx(36.0)
+        assert seconds[1] == pytest.approx(36.0)
 
 
 # ---------------------------------------------------------------------------

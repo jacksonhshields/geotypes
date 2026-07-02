@@ -205,20 +205,24 @@ class LL(GeoType):
         print(f"Latitude: {self.lat}, Longitude: {self.lon}")
 
     def print_degrees_minutes(self):
-        lat_deg = int(self.lat)
-        lat_min = abs((self.lat - lat_deg) * 60)
-        lon_deg = int(self.lon)
-        lon_min = abs((self.lon - lon_deg) * 60)
-        print(f"Latitude: {lat_deg}° {lat_min}', Longitude: {lon_deg}° {lon_min}'")
+        lat_sign = "-" if self.lat < 0 else ""
+        lat_deg = int(abs(self.lat))
+        lat_min = (abs(self.lat) - lat_deg) * 60
+        lon_sign = "-" if self.lon < 0 else ""
+        lon_deg = int(abs(self.lon))
+        lon_min = (abs(self.lon) - lon_deg) * 60
+        print(f"Latitude: {lat_sign}{lat_deg}° {lat_min}', Longitude: {lon_sign}{lon_deg}° {lon_min}'")
 
     def print_degrees_minutes_second(self):
-        lat_deg = int(self.lat)
-        lat_min = int((self.lat - lat_deg) * 60)
-        lat_sec = ((self.lat - lat_deg) * 60 - lat_min) * 60
-        lon_deg = int(self.lon)
-        lon_min = int((self.lon - lon_deg) * 60)
-        lon_sec = ((self.lon - lon_deg) * 60 - lon_min) * 60
-        print(f"Latitude: {lat_deg}° {lat_min}' {lat_sec}'', Longitude: {lon_deg}° {lon_min}' {lon_sec}''")
+        lat_sign = "-" if self.lat < 0 else ""
+        lat_deg = int(abs(self.lat))
+        lat_min = int((abs(self.lat) - lat_deg) * 60)
+        lat_sec = ((abs(self.lat) - lat_deg) * 60 - lat_min) * 60
+        lon_sign = "-" if self.lon < 0 else ""
+        lon_deg = int(abs(self.lon))
+        lon_min = int((abs(self.lon) - lon_deg) * 60)
+        lon_sec = ((abs(self.lon) - lon_deg) * 60 - lon_min) * 60
+        print(f"Latitude: {lat_sign}{lat_deg}° {lat_min}' {lat_sec}'', Longitude: {lon_sign}{lon_deg}° {lon_min}' {lon_sec}''")
 
 
 
