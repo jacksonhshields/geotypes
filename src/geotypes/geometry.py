@@ -56,6 +56,26 @@ def get_geo_to_local_transformer(src_crs, local_origin_ll):
     geo_proj = pyproj.Proj(src_crs)
     return pyproj.Transformer.from_proj(geo_proj, local_proj, always_xy=True)
 
+def dms_to_decimal(deg, minutes=0.0, seconds=0.0):
+    """
+    Converts degrees, minutes and seconds to decimal degrees.
+
+    A negative sign on any component marks the whole coordinate as negative,
+    so sub-degree southern/western coordinates can be expressed with zero
+    degrees and negative minutes, e.g. (0, -30) -> -0.5.
+
+    Args:
+        deg: (int) The degrees
+        minutes: (float) The minutes
+        seconds: (float) The seconds
+
+    Returns:
+        float: The decimal degrees
+    """
+    sign = -1.0 if (deg < 0 or minutes < 0 or seconds < 0) else 1.0
+    return sign * (abs(deg) + abs(minutes) / 60.0 + abs(seconds) / 3600.0)
+
+
 def check_crs_equal(crs_a, crs_b):
     def to_epsg_code(c):
         if isinstance(c, str):
@@ -142,6 +162,9 @@ class LL(GeoType):
         """
         Creates a LL from degrees and minutes
 
+        A negative sign on either component marks the coordinate as negative,
+        so e.g. 0°30'S is expressed as (lat_deg=0, lat_min=-30).
+
         Args:
             lat_deg: (int) The latitude degrees
             lat_min: (float) The latitude minutes
@@ -151,14 +174,17 @@ class LL(GeoType):
         Returns:
             LL: The LL
         """
-        lat = lat_deg + np.sign(lat_deg)*lat_min/60
-        lon = lon_deg + np.sign(lon_deg)*lon_min/60
+        lat = dms_to_decimal(lat_deg, lat_min)
+        lon = dms_to_decimal(lon_deg, lon_min)
         return cls(lat=lat, lon=lon)
 
     @classmethod
     def from_degrees_minutes_seconds(cls, lat_deg: int, lat_min: int, lat_sec: float, lon_deg: int, lon_min: int, lon_sec: float):
         """
         Creates a LL from degrees, minutes and seconds
+
+        A negative sign on any component marks the coordinate as negative,
+        so e.g. 0°0'30"S is expressed as (lat_deg=0, lat_min=0, lat_sec=-30).
 
         Args:
             lat_deg: (int) The latitude degrees
@@ -171,8 +197,8 @@ class LL(GeoType):
         Returns:
             LL: The LL
         """
-        lat = lat_deg + np.sign(lat_deg)*lat_min / 60 + np.sign(lat_deg)*lat_sec / 3600
-        lon = lon_deg + np.sign(lon_deg)*lon_min / 60 + np.sign(lon_deg)*lon_sec / 3600
+        lat = dms_to_decimal(lat_deg, lat_min, lat_sec)
+        lon = dms_to_decimal(lon_deg, lon_min, lon_sec)
         return cls(lat=lat, lon=lon)
 
     def print_degrees_decimal(self):
